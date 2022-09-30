@@ -26,6 +26,7 @@ public class MyPanel extends JPanel implements ActionListener{
 
     public void paint(Graphics g) {
 
+
         super.paint(g); //Paint backGtounf
 
         Graphics2D g2D = (Graphics2D) g;
@@ -36,9 +37,28 @@ public class MyPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.addKeyListener(new KeyListener(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_W){
+                    yVelocity = -1;
+                    System.out.println("W");
+                }
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
 
 
-            x = x + xVelocity;
+        x = x + xVelocity;
              y = y + yVelocity;
         repaint();
 }

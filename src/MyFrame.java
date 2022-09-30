@@ -3,12 +3,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.KeyEvent;
 public class MyFrame extends JFrame {
-
+int vy;
     MyPanel panel;
 
     MyFrame(){
 
         panel = new MyPanel();
+
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(panel);
