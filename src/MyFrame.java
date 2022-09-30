@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.awt.event.KeyEvent;
 public class MyFrame extends JFrame {
 
     MyPanel panel;
@@ -13,6 +15,7 @@ public class MyFrame extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-    }
 
+
+}
 }

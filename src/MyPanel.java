@@ -10,8 +10,8 @@ public class MyPanel extends JPanel implements ActionListener{
     Image enemy;
     Timer timer;
 
-    int xVelocity;
-    int yVelocity;
+    int xVelocity = 1;
+    int yVelocity = 1;
     int x = 10;
     int y = 10;
 
@@ -20,7 +20,7 @@ public class MyPanel extends JPanel implements ActionListener{
         this.setPreferredSize(new Dimension(PANEL_WIDTH,PANEL_HEIGHT));
         this.setBackground(Color.black);
         enemy = new ImageIcon("C:\\Users\\Jupiter2009\\Downloads\\Testing\\src\\game\\enemy.png").getImage();
-        timer = new Timer(1, this);
+        timer = new Timer(10, this);
         timer.start();
     }
 
@@ -37,7 +37,9 @@ public class MyPanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        x = x + xVelocity;
+
+            x = x + xVelocity;
+             y = y + yVelocity;
         repaint();
-    }
+}
 }
