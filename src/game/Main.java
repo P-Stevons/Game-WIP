@@ -17,21 +17,25 @@ class Main {
             public void keyPressed(KeyEvent e) {
 
                 if (e.getKeyChar() == 'a') {
-                    panel.setxVelocity(-1);
+                    panel.setxVelocity(-7);
                 }
                 if (e.getKeyChar() == 'd') {
-                    panel.setxVelocity(1);
+                    panel.setxVelocity(7);
                 }
                 if ((e.getKeyChar() == ' ') && (Collision.collides(panel.getx(), panel.gety()))) {
-                    panel.setyVelocity(-10);
+                    panel.setyVelocity(-20);
 
                 }
+
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                panel.setyVelocity(0);
-                panel.setxVelocity(0);
+                if ((e.getKeyChar() == 'a')||(e.getKeyChar() == 'd')) {
+                    panel.setxVelocity(0);
+                }
+
+
             }
         });
     }
