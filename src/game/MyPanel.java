@@ -6,8 +6,8 @@ import java.awt.event.*;
 
 public class MyPanel extends JPanel implements ActionListener {
 
-    final int PANEL_WIDTH = 500;
-    final int PANEL_HEIGHT = 500;
+    final int PANEL_WIDTH = 700;
+    final int PANEL_HEIGHT = 700;
 
     Image enemy;
     Timer timer;
@@ -33,9 +33,18 @@ public class MyPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+
+
         x = x + xVelocity;
         y = y + yVelocity;
         repaint();
+        int[] vs = {xVelocity, yVelocity};
+        int[] newVs = Collision.collides(x, y, vs);
+        xVelocity = newVs[0];
+        yVelocity = newVs[1];
+        if(!Collision.collides(x,y))
+        yVelocity ++;
     }
 
     public void setxVelocity(int xVelocity) {
@@ -45,4 +54,13 @@ public class MyPanel extends JPanel implements ActionListener {
     public void setyVelocity(int yVelocity) {
         this.yVelocity = yVelocity;
     }
+
+
+    public int gety() {
+        return y;
+    }
+    public int getx() {
+        return x;
+    }
 }
+
