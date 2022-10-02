@@ -1,5 +1,5 @@
 package game;
-
+//The actual code
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;

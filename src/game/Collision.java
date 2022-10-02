@@ -1,5 +1,5 @@
 package game;
-
+//makes collisions
 
 
 import javax.swing.*;
