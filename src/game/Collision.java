@@ -37,10 +37,10 @@ public class Collision {
             if ((y + height >= logy) && (y+height <= (logy + 55))) {
                 vy = 0;
                 y = logy - height;
-            } else if ((y > logy+55) && (y < (logy + 105))){
-                vy = 1;
-                y = logy+115;
-
+            }
+            if ((y > logy+55) && (y < (logy + 105))){
+                vy = 0;
+                y = logy+110;
             }
         }
 
@@ -54,14 +54,13 @@ public class Collision {
 return placement;
     }
     public static boolean collides(int x, int y, int logx, int logy){
-        if((y+100) >= 1024){
+        if((y+64) >= 1024){
             return true;
         }
-        if((x >= logx)&&((x < (logx + 330)))) {
-            if ((y + 64 >= logy) && (y + 64<= (logy + 55))) {
+        if(((x >= logx)&&((x < (logx + 330))))&&((y + 64 >= logy) && (y + 64< (logy + 55)))) {
                 return true;
             }
-        }
+
         return false;
     }
 
