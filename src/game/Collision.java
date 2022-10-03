@@ -37,6 +37,10 @@ public class Collision {
             if ((y + height >= logy) && (y+height <= (logy + 55))) {
                 vy = 0;
                 y = logy - height;
+            } else if ((y > logy+55) && (y < (logy + 105))){
+                vy = 1;
+                y = logy+115;
+
             }
         }
 
