@@ -33,8 +33,8 @@ public class Collision {
             x = 0;
         }
         //collisions with the log
-        if((x > logx)&&((x < (logx + 330)))) {
-            if ((y + height > logy) && (y+height < (logy + 55))) {
+        if((x >= logx)&&((x <= (logx + 330)))) {
+            if ((y + height >= logy) && (y+height <= (logy + 55))) {
                 vy = 0;
                 y = logy - height;
             }
@@ -53,8 +53,8 @@ return placement;
         if((y+100) >= 1024){
             return true;
         }
-        if((x > logx)&&((x < (logx + 330)))) {
-            if ((y + 64 >= logy) && (y + 64< (logy + 55))) {
+        if((x >= logx)&&((x < (logx + 330)))) {
+            if ((y + 64 >= logy) && (y + 64<= (logy + 55))) {
                 return true;
             }
         }
