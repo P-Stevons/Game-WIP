@@ -11,13 +11,15 @@ public class MyPanel extends JPanel implements ActionListener {
 
     Image player;
     Image backGround;
-    Image plat;
+    Image log;
     Timer timer;
 
     int xVelocity = 0;
     int yVelocity = 0;
     int x = 10;
     int y = 10;
+    int logx = 0;
+    int logy = 820;
     int height = 64;
     int width = 64;
     MyPanel() {
@@ -25,8 +27,7 @@ public class MyPanel extends JPanel implements ActionListener {
         this.setBackground(Color.black);
         player = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\player.png").getImage();
         backGround = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\backGround.png").getImage();
-        plat = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\plat.png").getImage();
-
+        log = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\log.png").getImage();
         timer = new Timer(10, this);
         timer.start();
     }
@@ -35,7 +36,7 @@ public class MyPanel extends JPanel implements ActionListener {
         super.paint(g); //Paint backGtounf
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(backGround, 0, 0, null);
-        g2D.drawImage(plat, 0, 820, null);
+        g2D.drawImage(log, logx, logy, null);
         g2D.drawImage(player, x, y, null);
 
     }
@@ -43,21 +44,19 @@ public class MyPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-
-
-
         x = x + xVelocity;
         y = y + yVelocity;
-        int[] vs = {xVelocity, yVelocity, x, y};
-        int[] newVs = Collision.collides(height, width, vs);
+        int[] toCol = {xVelocity, yVelocity, x, y, logx, logy};
+        int[] newVs = Collision.collides(height, width, toCol);
         xVelocity = newVs[0];
         yVelocity = newVs[1];
         x = newVs[2];
         y = newVs[3];
-        if(!Collision.collides(x,y))
-        yVelocity += 1;
-
+        if(!(Collision.collides(x,y,logx, logy))) {
+            yVelocity ++;
+        }
         repaint();
+
     }
 
     public void setxVelocity(int xVelocity) {
@@ -74,6 +73,12 @@ public class MyPanel extends JPanel implements ActionListener {
     }
     public int getx() {
         return x;
+    }
+    public int getLogx() {
+        return logx;
+    }
+    public int getLogy() {
+            return logy;
     }
 }
 

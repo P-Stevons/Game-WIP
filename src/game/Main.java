@@ -22,7 +22,7 @@ class Main {
                 if (e.getKeyChar() == 'd') {
                     panel.setxVelocity(7);
                 }
-                if ((e.getKeyChar() == ' ') && (Collision.collides(panel.getx(), panel.gety()))) {
+                if ((e.getKeyChar() == ' ') && (Collision.collides(panel.getx(), panel.gety(), panel.getLogx(), panel.getLogy()))) {
                     panel.setyVelocity(-20);
 
                 }
