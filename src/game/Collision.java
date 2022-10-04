@@ -13,20 +13,21 @@ import java.awt.event.KeyEvent;
 
 public class Collision {
 //vx, vy, x, y, logx, logy
-    public static int[] collides(int height,int width, int[] placement){
+
+    //What if we used setters and getters more. //and also separated the methods further
+    public static int[] collides(int logx,int logy, int[] placement){
         int vx = placement[0];
         int vy = placement[1];
         int x = placement[2];
         int y = placement[3];
-        int logx = placement[4];
-        int logy = placement[5];
-        if((y+height) > 1024){
+
+        if((y+64) > 1024){
            vy = 0;
-            y = 1024-height;
+            y = 1024-64;
         }
-        if((x+width) > 1024){
+        if((x+64) > 1024){
             vx = 0;
-            x = 1024-width;
+            x = 1024-64;
         }
         if(x < 0){
             vx = 0;
@@ -34,9 +35,9 @@ public class Collision {
         }
         //collisions with the log
         if((x >= logx)&&((x <= (logx + 330)))) {
-            if ((y + height >= logy) && (y+height <= (logy + 55))) {
+            if ((y + 64 >= logy) && (y+64 <= (logy + 55))) {
                 vy = 0;
-                y = logy - height;
+                y = logy - 64;
             }
             if ((y > logy+55) && (y < (logy + 105))){
                 vy = 0;
@@ -48,8 +49,6 @@ public class Collision {
             placement[1] = vy;
             placement[2] = x;
             placement[3] = y;
-            placement[4] = logx;
-            placement[5] = logy;
 
 return placement;
     }
