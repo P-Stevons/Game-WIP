@@ -12,47 +12,50 @@ import java.awt.event.KeyEvent;
 
 
 public class Collision {
-//vx, vy, x, y, logx, logy
 
-    //What if we used setters and getters more. //and also separated the methods further
-    public static int[] collides(int logx,int logy, int[] placement){
-        int vx = placement[0];
-        int vy = placement[1];
-        int x = placement[2];
-        int y = placement[3];
+
+
+    public static void collide(MyPanel panel, int logx, int logy){
+
+        int x = panel.getx();
+        int y = panel.gety();
+        int xVelocity = panel.getxVelocity();
+        int yVelocity = panel.getyVelocity();
 
         if((y+64) > 1024){
-           vy = 0;
+           yVelocity = 0;
             y = 1024-64;
         }
         if((x+64) > 1024){
-            vx = 0;
+            xVelocity = 0;
             x = 1024-64;
         }
         if(x < 0){
-            vx = 0;
+            xVelocity = 0;
             x = 0;
         }
         //collisions with the log
         if((x >= logx)&&((x <= (logx + 330)))) {
             if ((y + 64 >= logy) && (y+64 <= (logy + 55))) {
-                vy = 0;
+                yVelocity = 0;
                 y = logy - 64;
             }
             if ((y > logy+55) && (y < (logy + 105))){
-                vy = 0;
+                yVelocity = 0;
                 y = logy+110;
             }
         }
 
-            placement[0] = vx;
-            placement[1] = vy;
-            placement[2] = x;
-            placement[3] = y;
+         panel.setx(x);
+        panel.sety(y);
+        panel.setxVelocity(xVelocity);
+        panel.setyVelocity(yVelocity);
 
-return placement;
+
     }
-    public static boolean collides(int x, int y, int logx, int logy){
+    public static boolean collides(MyPanel panel, int logx, int logy){
+        int x = panel.getx();
+        int y = panel.gety();
         if((y+64) >= 1024){
             return true;
         }

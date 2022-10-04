@@ -14,7 +14,7 @@ public class MyPanel extends JPanel implements ActionListener {
     Image log;
     Image log2;
     Timer timer;
-
+    int level = 0;
     int xVelocity = 0;
     int yVelocity = 0;
     int x = 10;
@@ -23,8 +23,6 @@ public class MyPanel extends JPanel implements ActionListener {
     int logy = 740;
     int log2x = 500;
     int log2y = 820;
-    int height = 64;
-    int width = 64;
     MyPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
@@ -51,14 +49,9 @@ public class MyPanel extends JPanel implements ActionListener {
 
         x = x + xVelocity;
         y = y + yVelocity;
-        int[] toCol = {xVelocity, yVelocity, x, y};
-        toCol = Collision.collides(logx, logy, toCol);
-        toCol = Collision.collides(log2x, log2y, toCol);
-        xVelocity = toCol[0];
-        yVelocity = toCol[1];
-        x = toCol[2];
-        y = toCol[3];
-        if(!(Collision.collides(x,y,logx, logy)||(Collision.collides(x,y,log2x, log2y)))) {
+        Collision.collide(this, logx, logy);
+        Collision.collide(this, log2x, log2y);
+        if(!(Collision.collides(this ,logx, logy)||(Collision.collides(this,log2x, log2y)))) {
             yVelocity ++;
         }
         repaint();
@@ -72,7 +65,20 @@ public class MyPanel extends JPanel implements ActionListener {
     public void setyVelocity(int yVelocity) {
         this.yVelocity = yVelocity;
     }
+    public int getxVelocity() {
+        return xVelocity;
+    }
 
+    public int getyVelocity() {
+        return yVelocity;
+    }
+    public void setx(int x) {
+        this.x = x;
+    }
+
+    public void sety(int y) {
+        this.y = y;
+    }
 
     public int gety() {
         return y;
@@ -80,17 +86,18 @@ public class MyPanel extends JPanel implements ActionListener {
     public int getx() {
         return x;
     }
-    public int getLogx() {
+    public int getlogy() {
+        return logy;
+    }
+    public int getlogx() {
         return logx;
     }
-    public int getLogy() {
-            return logy;
-    }
-    public int getLog2x() {
-        return log2x;
-    }
-    public int getLog2y() {
+    public int getlog2y() {
         return log2y;
     }
+    public int getlog2x() {
+        return log2x;
+    }
+
 }
 
