@@ -29,13 +29,19 @@ public class Collision {
         if((x+64) > 1024){
             xVelocity = 0;
             x = 1024-64;
+            if(panel.getlevel() == 0){
+                panel.level1();
+            }
         }
         if(x < 0){
             xVelocity = 0;
             x = 0;
+            if(panel.getlevel() == 1){
+                panel.level0();
+            }
         }
         //collisions with the log
-        if((x >= logx)&&((x <= (logx + 330)))) {
+        if((x+64 >= logx)&&((x <= (logx + 330)))) {
             if ((y + 64 >= logy) && (y+64 <= (logy + 55))) {
                 yVelocity = 0;
                 y = logy - 64;
@@ -46,7 +52,7 @@ public class Collision {
             }
         }
 
-         panel.setx(x);
+        panel.setx(x);
         panel.sety(y);
         panel.setxVelocity(xVelocity);
         panel.setyVelocity(yVelocity);
@@ -59,7 +65,7 @@ public class Collision {
         if((y+64) >= 1024){
             return true;
         }
-        if(((x >= logx)&&((x < (logx + 330))))&&((y + 64 >= logy) && (y + 64< (logy + 55)))) {
+        if(((x + 64 >= logx)&&((x < (logx + 330))))&&((y + 64 >= logy) && (y + 64< (logy + 55)))) {
                 return true;
             }
 

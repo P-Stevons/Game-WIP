@@ -9,16 +9,17 @@ class Main {
         MyFrame frame = new MyFrame(panel);
 
         frame.addKeyListener(new KeyListener() {
-            int logx = panel.getlogx();
-            int logy = panel.getlogy();
-            int log2x = panel.getlog2x();
-            int log2y = panel.getlog2y();
+
             @Override
             public void keyTyped(KeyEvent e) {
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
+                int logx = panel.getlogx();
+                int logy = panel.getlogy();
+                int log2x = panel.getlog2x();
+                int log2y = panel.getlog2y();
 
                 if (e.getKeyChar() == 'a') {
                     panel.setxVelocity(-7);
@@ -26,7 +27,7 @@ class Main {
                 if (e.getKeyChar() == 'd') {
                     panel.setxVelocity(7);
                 }
-                //Maybe this could be simplifie
+                //Maybe this could be simplified
                 if ((e.getKeyChar() == ' ') && ((Collision.collides(panel, logx, logy))|| (Collision.collides(panel, log2x, log2y)))){
                     panel.setyVelocity(-20);
 

@@ -23,6 +23,7 @@ public class MyPanel extends JPanel implements ActionListener {
     int logy = 740;
     int log2x = 500;
     int log2y = 820;
+
     MyPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
@@ -55,7 +56,21 @@ public class MyPanel extends JPanel implements ActionListener {
             yVelocity ++;
         }
         repaint();
+    }
 
+    public void level0(){
+       logx = 0;
+       logy = 740;
+       log2x = 500;
+       log2y = 820;
+       level = 0;
+    }
+    public void level1(){
+         logx = 650;
+         logy = 740;
+         log2x = 20;
+         log2y = 820;
+         level = 1;
     }
 
     public void setxVelocity(int xVelocity) {
@@ -97,6 +112,9 @@ public class MyPanel extends JPanel implements ActionListener {
     }
     public int getlog2x() {
         return log2x;
+    }
+    public int getlevel() {
+        return level;
     }
 
 }
