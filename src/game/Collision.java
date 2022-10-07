@@ -21,11 +21,17 @@ public class Collision {
         int y = panel.gety();
         int xVelocity = panel.getxVelocity();
         int yVelocity = panel.getyVelocity();
-
-        if((y+64) > 1024){
-           yVelocity = 0;
-            y = 1024-64;
-        }
+if(panel.getlevel() == 0) {
+    if ((y + 64) > 1024) {
+        yVelocity = 0;
+        y = 1024 - 64;
+    }
+} else if( panel.getlevel() == 1){
+    if ((y + 64) > 600) {
+        yVelocity = 0;
+        y = 600 - 64;
+    }
+}
         if((x+64) > 1024){
             xVelocity = 0;
             x = 1024-64;
@@ -64,8 +70,14 @@ public class Collision {
     public static boolean collides(MyPanel panel, int logx, int logy){
         int x = panel.getx();
         int y = panel.gety();
-        if((y+64) >= 1024){
-            return true;
+        if(panel.getlevel() == 0) {
+            if ((y + 64) >= 1024) {
+                return true;
+            }
+        } else if( panel.getlevel() == 1){
+            if ((y + 64) >= 600) {
+                return true;
+            }
         }
         if(((x + 64 >= logx)&&((x < (logx + 330))))&&((y + 64 >= logy) && (y + 64< (logy + 55)))) {
                 return true;
@@ -78,6 +90,13 @@ public class Collision {
         int y = panel.gety();
         if((x + 64 >= keyx)&&(x <= keyx + 64)&&(y + 64 >= keyy)&&(y <= keyy + 64))
         return true;
+        return false;
+    }
+    public static boolean collidesLock(MyPanel panel, int lockx, int locky){
+        int x = panel.getx();
+        int y = panel.gety();
+        if((x + 64 >= lockx)&&(x <= lockx+ 205)&&(y + 64 >= locky)&&(y <= locky + 600))
+            return true;
         return false;
     }
 

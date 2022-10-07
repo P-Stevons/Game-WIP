@@ -23,6 +23,9 @@ class Main {
                 int log2y = panel.getlog2y();
                 int keyx = panel.getKeyx();
                 int keyy = panel.getKeyy();
+                int lockx = panel.getLockx();
+                int locky= panel.getLocky();
+                int level = panel.getlevel();
                 boolean[] hasItems = panel.getHasItems();
 
                 if (e.getKeyChar() == 'a') {
@@ -35,9 +38,15 @@ class Main {
                 if ((e.getKeyChar() == ' ') && ((Collision.collides(panel, logx, logy))|| (Collision.collides(panel, log2x, log2y)))){
                     panel.setyVelocity(-20);
                 }
-                if ((e.getKeyChar() == 'e')&&(Collision.collidesKey(panel, keyx, keyy))) {
-                    hasItems[0] =true;
-                    System.out.println("collected key");
+                if (e.getKeyChar() == 'e'){
+                    if (Collision.collidesKey(panel, keyx, keyy)) {
+                        hasItems[0] = true;
+                        System.out.println("collected key");
+                    }
+                    if((hasItems[0])&&(Collision.collidesLock(panel, lockx, locky))&&(!hasItems[1])){
+                        hasItems[1] = true;
+                        System.out.println("Opened locker");
+                    }
                 }
                 panel.setHasItems(hasItems);
             }

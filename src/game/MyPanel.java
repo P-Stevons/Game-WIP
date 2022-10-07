@@ -14,6 +14,7 @@ public class MyPanel extends JPanel implements ActionListener {
     Image log;
     Image log2;
     Image key;
+    Image hallways;
     Timer timer;
     int level = 0;
     int xVelocity = 0;
@@ -26,6 +27,8 @@ public class MyPanel extends JPanel implements ActionListener {
     int log2y = 820;
     int keyx = 2000;
     int keyy = 2000;
+    int lockx = 615;
+    int locky = 0;
     boolean[] hasItems = new boolean[8];
 
     MyPanel() {
@@ -33,6 +36,7 @@ public class MyPanel extends JPanel implements ActionListener {
         this.setBackground(Color.black);
         player = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\player.png").getImage();
         backGround = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\backGround.png").getImage();
+        hallways = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\hallways.png").getImage();
         log = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\log.png").getImage();
         log2 = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\log.png").getImage();
         key = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\key.png").getImage();
@@ -43,7 +47,11 @@ public class MyPanel extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         super.paint(g); //Paint backGtounf
         Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(backGround, 0, 0, null);
+        if(level == 0) {
+            g2D.drawImage(backGround, 0, 0, null);
+        } else {
+            g2D.drawImage(hallways, 0, 0, null);
+        }
         g2D.drawImage(log, logx, logy, null);
         g2D.drawImage(log2, log2x, log2y, null);
         g2D.drawImage(player, x, y, null);
@@ -58,7 +66,7 @@ public class MyPanel extends JPanel implements ActionListener {
             keyy = 32;
         } else if(level == 1){
              keyx = 200;
-             keyy = 780;
+             keyy = 520;
         } else {
             keyx = 2000;
             keyy = 2000;
@@ -144,6 +152,13 @@ public class MyPanel extends JPanel implements ActionListener {
 
     public void setHasItems(boolean[] hasItems) {
         this.hasItems = hasItems;
+    }
+    public int getLockx() {
+        return lockx;
+    }
+
+    public int getLocky() {
+        return locky;
     }
 }
 
