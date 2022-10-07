@@ -31,6 +31,7 @@ public class Collision {
             x = 1024-64;
             if(panel.getlevel() == 0){
                 panel.level1();
+                x = 0;
             }
         }
         if(x < 0){
@@ -38,6 +39,7 @@ public class Collision {
             x = 0;
             if(panel.getlevel() == 1){
                 panel.level0();
+                x = 1024-64;
             }
         }
         //collisions with the log
@@ -69,6 +71,13 @@ public class Collision {
                 return true;
             }
 
+        return false;
+    }
+    public static boolean collidesKey(MyPanel panel, int keyx, int keyy){
+        int x = panel.getx();
+        int y = panel.gety();
+        if((x + 64 >= keyx)&&(x <= keyx + 64)&&(y + 64 >= keyy)&&(y <= keyy + 64))
+        return true;
         return false;
     }
 

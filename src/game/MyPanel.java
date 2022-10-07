@@ -6,13 +6,14 @@ import java.awt.event.*;
 
 public class MyPanel extends JPanel implements ActionListener {
 
-    final int PANEL_WIDTH = 1024;
+    final int PANEL_WIDTH = 1024+ 128;
     final int PANEL_HEIGHT = 1024;
 
     Image player;
     Image backGround;
     Image log;
     Image log2;
+    Image key;
     Timer timer;
     int level = 0;
     int xVelocity = 0;
@@ -23,6 +24,9 @@ public class MyPanel extends JPanel implements ActionListener {
     int logy = 740;
     int log2x = 500;
     int log2y = 820;
+    int keyx = 2000;
+    int keyy = 2000;
+    boolean[] hasItems = new boolean[8];
 
     MyPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -31,6 +35,7 @@ public class MyPanel extends JPanel implements ActionListener {
         backGround = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\backGround.png").getImage();
         log = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\log.png").getImage();
         log2 = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\log.png").getImage();
+        key = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\key.png").getImage();
         timer = new Timer(10, this);
         timer.start();
     }
@@ -42,12 +47,22 @@ public class MyPanel extends JPanel implements ActionListener {
         g2D.drawImage(log, logx, logy, null);
         g2D.drawImage(log2, log2x, log2y, null);
         g2D.drawImage(player, x, y, null);
+        g2D.drawImage(key, keyx, keyy, null);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(hasItems[0]){
+            keyx = 1024 + 32;
+            keyy = 32;
+        } else if(level == 1){
+             keyx = 200;
+             keyy = 780;
+        } else {
+            keyx = 2000;
+            keyy = 2000;
+        }
         x = x + xVelocity;
         y = y + yVelocity;
         Collision.collide(this, logx, logy);
@@ -116,6 +131,19 @@ public class MyPanel extends JPanel implements ActionListener {
     public int getlevel() {
         return level;
     }
+    public int getKeyx() {
+        return keyx;
+    }
+    public int getKeyy() {
+        return keyy;
+    }
 
+    public boolean[] getHasItems() {
+        return hasItems;
+    }
+
+    public void setHasItems(boolean[] hasItems) {
+        this.hasItems = hasItems;
+    }
 }
 

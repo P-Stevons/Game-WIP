@@ -1,5 +1,6 @@
 package game;
 //Main
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -20,6 +21,9 @@ class Main {
                 int logy = panel.getlogy();
                 int log2x = panel.getlog2x();
                 int log2y = panel.getlog2y();
+                int keyx = panel.getKeyx();
+                int keyy = panel.getKeyy();
+                boolean[] hasItems = panel.getHasItems();
 
                 if (e.getKeyChar() == 'a') {
                     panel.setxVelocity(-7);
@@ -30,9 +34,12 @@ class Main {
                 //Maybe this could be simplified
                 if ((e.getKeyChar() == ' ') && ((Collision.collides(panel, logx, logy))|| (Collision.collides(panel, log2x, log2y)))){
                     panel.setyVelocity(-20);
-
                 }
-
+                if ((e.getKeyChar() == 'e')&&(Collision.collidesKey(panel, keyx, keyy))) {
+                    hasItems[0] =true;
+                    System.out.println("collected key");
+                }
+                panel.setHasItems(hasItems);
             }
 
             @Override
