@@ -9,22 +9,14 @@ public class MyPanel extends JPanel implements ActionListener {
     final int PANEL_WIDTH = 1024+ 128;
     final int PANEL_HEIGHT = 1024;
 
-    Image player;
+    Player player;
     Image backGround;
-    Image log;
-    Image log2;
+    Log log;
+    Log log2;
     Image key;
     Image hallways;
     Timer timer;
     int level = 0;
-    int xVelocity = 0;
-    int yVelocity = 0;
-    int x = 10;
-    int y = 10;
-    int logx = 0;
-    int logy = 740;
-    int log2x = 500;
-    int log2y = 820;
     int keyx = 2000;
     int keyy = 2000;
     int lockx = 615;
@@ -34,11 +26,13 @@ public class MyPanel extends JPanel implements ActionListener {
     MyPanel() {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
-        player = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\player.png").getImage();
+        player = new Player(10, 10);
         backGround = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\backGround.png").getImage();
         hallways = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\hallways.png").getImage();
-        log = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\log.png").getImage();
-        log2 = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\log.png").getImage();
+        // TODO this becomes
+        // log = new Log(0, 740)
+        log = new Log(0, 740);
+        log2 = new Log(500, 820);
         key = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\key.png").getImage();
         timer = new Timer(10, this);
         timer.start();
@@ -52,9 +46,10 @@ public class MyPanel extends JPanel implements ActionListener {
         } else {
             g2D.drawImage(hallways, 0, 0, null);
         }
-        g2D.drawImage(log, logx, logy, null);
-        g2D.drawImage(log2, log2x, log2y, null);
-        g2D.drawImage(player, x, y, null);
+
+        log.draw(g2D);
+        log2.draw(g2D);
+        player.draw(g2D);
         g2D.drawImage(key, keyx, keyy, null);
 
     }
@@ -71,70 +66,67 @@ public class MyPanel extends JPanel implements ActionListener {
             keyx = 2000;
             keyy = 2000;
         }
-        x = x + xVelocity;
-        y = y + yVelocity;
-        Collision.collide(this, logx, logy);
-        Collision.collide(this, log2x, log2y);
-        if(!(Collision.collides(this ,logx, logy)||(Collision.collides(this,log2x, log2y)))) {
-            yVelocity ++;
+       player.moveFromVelocity();
+        Collision.collide(this, log.x, log.y);
+        Collision.collide(this, log2.x, log2.y);
+        if(!(Collision.collides(this ,log.x, log.y)||(Collision.collides(this,log2.x, log2.y)))) {
+
         }
+        player.fall();
+
         repaint();
     }
 
     public void level0(){
-       logx = 0;
-       logy = 740;
-       log2x = 500;
-       log2y = 820;
+       log.moveTo(0, 740);
+       log2.moveTo(500, 820);
        level = 0;
     }
     public void level1(){
-         logx = 650;
-         logy = 740;
-         log2x = 20;
-         log2y = 820;
+        log.moveTo(650, 740);
+        log2.moveTo(20, 820);
          level = 1;
     }
 
     public void setxVelocity(int xVelocity) {
-        this.xVelocity = xVelocity;
+        player.xVelocity = xVelocity;
     }
 
     public void setyVelocity(int yVelocity) {
-        this.yVelocity = yVelocity;
+        player.yVelocity = yVelocity;
     }
     public int getxVelocity() {
-        return xVelocity;
+        return player.xVelocity;
     }
 
     public int getyVelocity() {
-        return yVelocity;
+        return player.yVelocity;
     }
     public void setx(int x) {
-        this.x = x;
+        player.x = x;
     }
 
     public void sety(int y) {
-        this.y = y;
+        player.y = y;
     }
 
     public int gety() {
-        return y;
+        return player.y;
     }
     public int getx() {
-        return x;
+        return player.x;
     }
     public int getlogy() {
-        return logy;
+        return log.y;
     }
     public int getlogx() {
-        return logx;
+        return log.x;
     }
     public int getlog2y() {
-        return log2y;
+        return log2.y;
     }
     public int getlog2x() {
-        return log2x;
+        return log2.x;
     }
     public int getlevel() {
         return level;
