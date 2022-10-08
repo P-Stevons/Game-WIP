@@ -8,6 +8,7 @@ public abstract class Drawable {
     final Image image;
     final int width;
     final int height;
+    // TODO make private
     int x;
     int y;
 

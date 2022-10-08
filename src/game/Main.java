@@ -25,7 +25,6 @@ class Main {
                 int keyy = panel.getKeyy();
                 int lockx = panel.getLockx();
                 int locky= panel.getLocky();
-                int level = panel.getlevel();
                 boolean[] hasItems = panel.getHasItems();
 
                 if (e.getKeyChar() == 'a') {

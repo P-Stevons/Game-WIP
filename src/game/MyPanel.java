@@ -6,7 +6,9 @@ import java.awt.event.*;
 
 public class MyPanel extends JPanel implements ActionListener {
 
-    final int PANEL_WIDTH = 1024+ 128;
+    public static final int TOOLBAR_WIDTH = 128;
+    public static final int GAME_AREA_WIDTH = 1024;
+    final int PANEL_WIDTH = GAME_AREA_WIDTH + TOOLBAR_WIDTH;
     final int PANEL_HEIGHT = 1024;
 
     Player player;
@@ -16,7 +18,9 @@ public class MyPanel extends JPanel implements ActionListener {
     Image key;
     Image hallways;
     Timer timer;
-    int level = 0;
+    Level[] levels = new Level[2];
+    int levelIndex;
+
     int keyx = 2000;
     int keyy = 2000;
     int lockx = 615;
@@ -27,8 +31,9 @@ public class MyPanel extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
         player = new Player(10, 10);
-        backGround = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\backGround.png").getImage();
-        hallways = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\hallways.png").getImage();
+        initializeLevels();
+
+        levelIndex = 0;
         // TODO this becomes
         // log = new Log(0, 740)
         log = new Log(0, 740);
@@ -38,14 +43,18 @@ public class MyPanel extends JPanel implements ActionListener {
         timer.start();
     }
 
+    private void initializeLevels() {
+        backGround = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\backGround.png").getImage();
+        hallways = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\hallways.png").getImage();
+
+        levels[0] = new Level(backGround, 2000, 2000, 1024, true, false);
+        levels[1] = new Level(hallways, 200, 520, 600, false, true);
+    }
+
     public void paint(Graphics g) {
         super.paint(g); //Paint backGtounf
         Graphics2D g2D = (Graphics2D) g;
-        if(level == 0) {
-            g2D.drawImage(backGround, 0, 0, null);
-        } else {
-            g2D.drawImage(hallways, 0, 0, null);
-        }
+        getLevel().drawImage(g2D);
 
         log.draw(g2D);
         log2.draw(g2D);
@@ -59,12 +68,9 @@ public class MyPanel extends JPanel implements ActionListener {
         if(hasItems[0]){
             keyx = 1024 + 32;
             keyy = 32;
-        } else if(level == 1){
-             keyx = 200;
-             keyy = 520;
         } else {
-            keyx = 2000;
-            keyy = 2000;
+            keyx =  getLevel().keyx;
+            keyy =  getLevel().keyy;
         }
        player.moveFromVelocity();
         Collision.collide(this, log.x, log.y);
@@ -80,12 +86,12 @@ public class MyPanel extends JPanel implements ActionListener {
     public void level0(){
        log.moveTo(0, 740);
        log2.moveTo(500, 820);
-       level = 0;
+       levelIndex = 0;
     }
     public void level1(){
         log.moveTo(650, 740);
         log2.moveTo(20, 820);
-         level = 1;
+         levelIndex = 1;
     }
 
     public void setxVelocity(int xVelocity) {
@@ -128,8 +134,8 @@ public class MyPanel extends JPanel implements ActionListener {
     public int getlog2x() {
         return log2.x;
     }
-    public int getlevel() {
-        return level;
+    public Level getlevel() {
+        return levels[levelIndex];
     }
     public int getKeyx() {
         return keyx;
@@ -151,6 +157,20 @@ public class MyPanel extends JPanel implements ActionListener {
 
     public int getLocky() {
         return locky;
+    }
+
+    public Level getLevel() {
+        return levels[levelIndex];
+    }
+
+    public void incrementLevel() {
+        ++levelIndex;
+        System.out.println("NEW LEVEL: " + levelIndex);
+    }
+
+    public void decrementLevel() {
+        --levelIndex;
+        System.out.println("NEW LEVEL: " + levelIndex);
     }
 }
 

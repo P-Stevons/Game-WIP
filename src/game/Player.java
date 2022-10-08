@@ -1,11 +1,13 @@
 package game;
 
 public class Player extends Drawable {
+    public static final int WIDTH = 64;
+    public static final int HEIGHT = 64;
     int xVelocity;
     int yVelocity;
 
     public Player(int startX, int startY) {
-        super("player.png", 64, 64, startX, startY);
+        super("player.png", WIDTH, HEIGHT, startX, startY);
     }
 
     public void moveFromVelocity() {
