@@ -15,14 +15,11 @@ public class MyPanel extends JPanel implements ActionListener {
     Image backGround;
     Log log;
     Log log2;
-    Image key;
+    Key key;
     Image hallways;
     Timer timer;
     Level[] levels = new Level[2];
     int levelIndex;
-
-    int keyx = 2000;
-    int keyy = 2000;
     int lockx = 615;
     int locky = 0;
     boolean[] hasItems = new boolean[8];
@@ -38,7 +35,7 @@ public class MyPanel extends JPanel implements ActionListener {
         // log = new Log(0, 740)
         log = new Log(0, 740);
         log2 = new Log(500, 820);
-        key = new ImageIcon("C:\\Users\\Jupiter2009\\Documents\\Peter\\Git\\game-wip\\src\\game\\images\\key.png").getImage();
+        key = new Key(2000, 2000);
         timer = new Timer(10, this);
         timer.start();
     }
@@ -59,18 +56,16 @@ public class MyPanel extends JPanel implements ActionListener {
         log.draw(g2D);
         log2.draw(g2D);
         player.draw(g2D);
-        g2D.drawImage(key, keyx, keyy, null);
+        key.draw(g2D);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(hasItems[0]){
-            keyx = 1024 + 32;
-            keyy = 32;
+        if(key.collected){
+           key.moveTo(1024+32, 32);
         } else {
-            keyx =  getLevel().keyx;
-            keyy =  getLevel().keyy;
+            key.moveTo(getLevel().keyx, getLevel().keyy);
         }
        player.moveFromVelocity();
         Collision.collide(this, log.x, log.y);
@@ -138,10 +133,10 @@ public class MyPanel extends JPanel implements ActionListener {
         return levels[levelIndex];
     }
     public int getKeyx() {
-        return keyx;
+        return key.x;
     }
     public int getKeyy() {
-        return keyy;
+        return key.y;
     }
 
     public boolean[] getHasItems() {

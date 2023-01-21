@@ -40,6 +40,7 @@ public abstract class Drawable {
      * @return true if this drawable overlaps with the other drawable
      */
     public boolean collidesWith(Drawable other) {
+
         return true;
     }
 

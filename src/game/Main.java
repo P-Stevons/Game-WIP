@@ -39,10 +39,10 @@ class Main {
                 }
                 if (e.getKeyChar() == 'e'){
                     if (Collision.collidesKey(panel, keyx, keyy)) {
-                        hasItems[0] = true;
+                        panel.key.collected = true;
                         System.out.println("collected key");
                     }
-                    if((hasItems[0])&&(Collision.collidesLock(panel, lockx, locky))&&(!hasItems[1])){
+                    if((panel.key.collected)&&(Collision.collidesLock(panel, lockx, locky))&&(!hasItems[1])){
                         hasItems[1] = true;
                         System.out.println("Opened locker");
                     }
